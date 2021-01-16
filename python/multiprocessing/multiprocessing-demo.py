@@ -15,9 +15,19 @@ def do_something():
     time.sleep(1)
     print('Done sleeping...')
 
+def main():
+    p1 = multiprocessing.Process(target=do_something)
+    p2 = multiprocessing.Process(target=do_something)
 
+    p1.start()
+    p2.start()
 
-finish = time.perf_counter()
+    p1.join()
+    p2.join()
 
-print(f'Finsihed in {round(finish-start, 2)} second(s)')
+    finish = time.perf_counter()
 
+    print(f'Finsihed in {round(finish-start, 2)} second(s)')
+
+if __name__ == "__main__":
+    main()
