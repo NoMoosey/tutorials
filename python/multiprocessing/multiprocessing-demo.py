@@ -10,16 +10,17 @@ import time
 
 start = time.perf_counter()
 
-def do_something():
-    print('Sleeping for 1 second...')
-    time.sleep(1)
+def do_something(seconds):
+    print(f'Sleeping for {seconds} second(s)...')
+    time.sleep(seconds)
     print('Done sleeping...')
 
 def main():
     processes = []
 
     for _ in range(10):
-        p = multiprocessing.Process(target=do_something)
+        p = multiprocessing.Process(target=do_something, args=[1.5])
+        # args must be serializable with Pickle
         p.start()
         processes.append(p)
 
