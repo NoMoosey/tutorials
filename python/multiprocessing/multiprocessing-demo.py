@@ -17,7 +17,7 @@ def do_something(seconds):
 
 def main():
     with concurrent.futures.ProcessPoolExecutor() as executor:
-        secs = [5, 4, 3, 2, 1]
+        secs = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
         results = [executor.submit(do_something, sec) for sec in secs]
 
         for f in concurrent.futures.as_completed(results):
