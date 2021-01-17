@@ -18,22 +18,10 @@ def do_something(seconds):
 def main():
     with concurrent.futures.ProcessPoolExecutor() as executor:
         secs = [5, 4, 3, 2, 1]
-        results = [executor.submit(do_something, sec) for sec in secs]
+        results = executor.map(do_something,secs)
 
-        for f in concurrent.futures.as_completed(results):
-            print(f.result())
-
-    # OLD WAY:
-    # processes = []
-
-    # for _ in range(10):
-    #     p = multiprocessing.Process(target=do_something, args=[1.5])
-    #     # args must be serializable with Pickle
-    #     p.start()
-    #     processes.append(p)
-
-    # for process in processes:
-    #     process.join()
+        for result in results:
+            print(result)
 
     finish = time.perf_counter()
 
